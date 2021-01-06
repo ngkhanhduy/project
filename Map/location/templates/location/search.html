@@ -1,0 +1,20 @@
+{% extends 'location/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Search
+{% endblock title %}
+
+{% block content %}
+    <h1>Wellcome {{username}} to Duy's Map
+        <h6><a href="{% url 'location:distance_view' %}">Caculate distance</a></h6>
+        <h6><a href="{% url 'location:logout_view' %}">Log out</a></h6>
+    </h1>
+    <hr>
+    {{map|safe}}
+    <form action="" method="POST" autocomplete="off" >
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">confirm</button>
+    </form>
+{% endblock content %}

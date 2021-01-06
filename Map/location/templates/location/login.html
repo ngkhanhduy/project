@@ -1,0 +1,25 @@
+{% extends 'location/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    <h1>Login</h1>
+    <hr>
+    <form class="site-form" action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {% csrf_token %}
+        {{form|crispy}}
+        <div>Don't have an account?<a href="{% url 'location:signup_view' %}">Sign Up</a> </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+{% endblock content %}

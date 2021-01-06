@@ -1,0 +1,46 @@
+{% extends 'location/base.html' %}
+{% load crispy_forms_tags %}
+<meta charset="utf-8">
+{% block title %}
+    Distance
+{% endblock title %}
+
+{% block content %}
+    <meta charset="utf-8">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Distance from {{location}} to {{destination}} is:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ distance }} km
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1>Wellcome {{username}} to Duy's Map
+        <h6><a href="{% url 'location:search_view' %}">Search</a></h6>
+        <h6><a href="{% url 'location:logout_view' %}">Log out</a></h6>
+    </h1>
+    <hr>
+
+    <form action="" method="POST" autocomplete="off" >
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">confirm</button>
+    </form>
+    {{map|safe}}
+    {% if request.POST and distance is not None %}
+        <script>
+        $(window).on('load', function(){
+            $('#exampleModal').modal('show')
+        })
+        </script>
+    {% endif %}
+
+{% endblock content %}
